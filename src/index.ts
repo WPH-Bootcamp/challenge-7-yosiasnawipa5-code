@@ -20,5 +20,15 @@
 // Hint: Gunakan recursive function atau while loop
 
 // TODO: Jalankan fungsi main
-console.log('Welcome to TypeScript To-Do App!');
-console.log('Start building your app here...');
+//console.log('Welcome to TypeScript To-Do App!');
+//console.log('Start building your app here...');
+import * as readliine from "readline";
+import { TodoService } from "./todoService";
+
+const service = new TodoService();
+
+const rl = readline.createInterface({
+  input: process.stdin, //sumber input: keyboard
+  output: process.stdout,
+})
+
