@@ -75,4 +75,73 @@ export class TodoService implements TodoOperations {
   }
 
   //DELETE: Hapus To-Do berdasarkan ID
+  deleteTodo(id: number): void {
+    const todos: TodoList = readTodos();
+    // cari apakah id ada
+    const todoToDelete = todos.find((todo) => todo.id === id);
+
+    if (!todoToDelete) {
+      console.log('❌ To-do dengan ID ${id} tidak ditemukan.');
+      return;
+    }
+
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    writeTodos(updatedTodos);
+
+    console.log('🗑️ To-do "${todoToDelete.title}" berhasil dihapus!');
+  }
+
+  //LIST: Tampilan semua To-Do
+  listTodos(): void {
+    const todos: TodoList = readTodos();
+
+    if (todos.length === 0) {
+      console.log("📭 Belum ada to-do. Tambahkan yang pertama!");
+      return;
+    }
+
+    console.log("\n" + "=".repeat(50));
+    console.log("📋 DAFTAR TO-DO");
+    console.log("=".repeat(50));
+
+    todos.forEach((todo, index) => {
+      const statusLabel = formatStatus(todo.status);
+      const number = (index + 1).toString().padStart(2, " "); // "1" -> "1"
+
+      console.log('${statusLabel} ${number}. ${todo.title}');
+    });
+
+    //tampilkan ringkasan statistik
+    const activeCount = todos.filter((t) => t.status === "active").length;
+    const doneCount = todos.filter((t) => t.status === "done").length;
+
+    console.log("=".repeat(50));
+    console.log('📊 Total: ${todos.length} | Aktif: ${activeCount} | Selesai: ${doneCount}');
+    console.log("=".repeat(50) + "\n");
+  }
+
+  //metthod dengan return type operationresult
+  addTodoSafe(title: string): OperationResult {
+    if (!isNonEmptyString(title)) {
+      return { success: false, error: "Judul tidak boleh kosong"
+      };
+    }
+
+    try {
+      const todos = readTodos();
+      const newTodo: Todo = {
+        id: generateId(todos),
+        title: title.trim(),
+        status: "active",
+        createdAt: getCurrentTimestamp(),
+      };
+      todos.push(newTodo);
+      writeTodos(todos);
+
+      return { success: true, message: 'To-do "${newTodo.title}" 
+        berhasil ditambahkan (ID: ${newTodo.id})' };
+    } catch (error) {
+      return { success: false, error: 'Gagal menyimpan: ${error}'};
+    }
+  }
 }
