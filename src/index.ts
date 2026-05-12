@@ -56,3 +56,30 @@ function showMenu(): void {
 }
 
 //main loop - Aplikasi berjalan sampai user pilih "keluar"
+async function main(): Promise<void> {
+  console.log("\n🚀 Selamat datang di To-Do App TypeScript!");
+  while (true) {
+    showMenu();
+    const choice = await prompt("pilih menu (1-5): ");
+    switch (choice) {
+        // ------------------------------------------
+      case "1": {
+        //Tambah To-do
+        const title = await prompt("judul to-do: ");
+
+        if (title === "") {
+          console.log("❌ Judul tidak boleh kosong!");
+        } else {
+          service.addTodo(title);
+        }
+        break;
+      }
+
+        // ----------------------------------------------
+      case "2": {
+        
+      }
+    }
+    
+  }
+}
