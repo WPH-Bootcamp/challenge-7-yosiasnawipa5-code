@@ -77,9 +77,69 @@ async function main(): Promise<void> {
 
         // ----------------------------------------------
       case "2": {
-        
+        service.listTodos();
+
+        const idInput = await prompt("Masukan ID yang ingin diselesaikan: ");
+        const id = parseInt(idInput, 10);
+
+        if (isNaN(id) || id <= 0) {
+          console.log("❌ ID harus berupa angka positif!");
+        } else {
+          service.completeTodo(id);
+        }
+        break;
       }
-    }
-    
+
+        //--------------------------------------------------
+      case "3": {
+        //hapus To-Do
+        service.listTodos();
+
+        const idInput = await prompt("Masukkan ID yang ingin dihapus: ");
+        const id = parseInt(idInput, 10);
+
+        if (isNaN(id) || id <= 0) {
+          console.log("❌ ID harus berupa angka positif!");
+        } else {
+          //minta konfigurasi sebelum hapus
+          const confirm = await prompt('Yakin hapus to-do ID ${id}? (y/n): ');
+          if (confirm.toLowerCase() === "y") {
+            service.deleteTodo(id);
+          } else {
+            console.log("ℹ️ Penghapusan dibatalkan.");
+          }
+        }
+        break;
+      }
+
+        //------------------------------------------------------
+      case "4": {
+        //lihat semua To-Do
+        service.listTodos();
+        break;
+      }
+
+        //------------------------------------------------
+      case "5": {
+        //keluar dari aplikasi
+        console.log("\n👋🏿 Sampai jumpa Tetap produktif!\n");
+        rl.close();// tutup readline interface
+        process.exit(0); //Hentikan program dengan kode sukses
+      }
+
+        //-------------------------------------------------------
+      default: {
+        //input tidak valid (bukan 1-5)
+        console.log('❌ Pilihan "${choice}" tidak valid. Masukan angka 1-5.');
+      }
+    } 
   }
 }
+
+
+// Jalankan main() dan tangkap error yang tidak terduga
+main().catch((error) => {
+  console.error("💥 Terjadi kesalahan fatal:", error);
+  rl.close();
+  process.exit(1); 
+});
