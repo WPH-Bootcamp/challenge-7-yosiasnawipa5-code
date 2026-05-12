@@ -37,7 +37,7 @@ export function isTodoList(value: unknown): value is TodoList {
     return false;
   }
   //setiap elemen dalam array harus lolos type guard isTodo()
-  return value.every((item) => is Todo(item));
+  return value.every((item) => isTodo(item));
 }
 
 // HELPER: Generate ID unik untuk To-Do baru
