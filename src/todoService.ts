@@ -138,10 +138,9 @@ export class TodoService implements TodoOperations {
       todos.push(newTodo);
       writeTodos(todos);
 
-      return { success: true, message: 'To-do "${newTodo.title}" 
-        berhasil ditambahkan (ID: ${newTodo.id})' };
+      return { success: true, message: `To-do "${newTodo.title}" berhasil ditambahkan (ID: ${newTodo.id})` };
     } catch (error) {
-      return { success: false, error: 'Gagal menyimpan: ${error}'};
+      return { success: false, error: `Gagal menyimpan: ${error}`};
     }
   }
 }
