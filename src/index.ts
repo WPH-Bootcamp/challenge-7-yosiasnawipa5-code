@@ -30,5 +30,29 @@ const service = new TodoService();
 const rl = readline.createInterface({
   input: process.stdin, //sumber input: keyboard
   output: process.stdout,
-})
+});
 
+// Helper : Tanya User dan return jawaban sebagai promise
+
+function promt(question: string): Promise<string> {
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => {
+      resolve(answer.trim()); //hapus spasi di ujung jawaban
+    });
+  });
+}
+
+//Tampilkan menu utama
+function showMenu(): void {
+  console.log("\n" + "=".repeat(40));
+  console.log("📋 TO-DO APP (TypeScript)");
+  console.log("=".repeat(40));
+  console.log("1. ➕ Tambah To-Do");
+  console.log("2. ✅ Tandai selesai");
+  console.log("3. 🗑️ Hapus To-Do");
+  console.log("4. 📋 Lihat Semua To-Do");
+  console.log("5. 🚪 Keluar");
+  console.log("=".repeat(40));
+}
+
+//main loop - Aplikasi berjalan sampai user pilih "keluar"
