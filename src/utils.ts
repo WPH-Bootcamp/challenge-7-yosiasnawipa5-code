@@ -22,7 +22,7 @@ export function isTodo(value: unknown): value is Todo {
     return false;
   }
   // langkah 2: Cast ke Record agar bisa akses properti-nya
-  const obj = value as Recod<string, unknown>;
+  const obj = value as Record<string, unknown>;
   //langkah 3: cek setiap properti yang wajib ada
   const hasId = typeof obj.id === "number";
   const hasTitle = typeof obj.title === "string";
@@ -33,11 +33,11 @@ export function isTodo(value: unknown): value is Todo {
 
 //type guard 3: cek apakah sesuatu adalah array of Todo
 export function isTodoList(value: unknown): value is TodoList {
-  if (!array.isArray(value)){
+  if (!Array.isArray(value)){
     return false;
   }
   //setiap elemen dalam array harus lolos type guard isTodo()
-  return value.every((item) => isTodo(item));
+  return (value as unknown[]).every((item: unknown) => isTodo(item));
 }
 
 // HELPER: Generate ID unik untuk To-Do baru
@@ -49,7 +49,7 @@ export function generateId(todos: TodoList): number {
 
   // math.max(...) butuh list angka
   // spread operator (...) mengubah array menjadi arument terpisah
-  const maxId = Math.max(...todos.map((todo) => todo.id));
+  const maxId = Math.max(...todos.map((Todo) => Todo.id));
   return maxId + 1;
 }
 
