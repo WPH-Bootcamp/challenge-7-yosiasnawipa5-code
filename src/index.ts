@@ -27,7 +27,7 @@ import { TodoService } from "./todoService";
 
 const service = new TodoService();
 
-const rl = readliine.createInterface({
+const rl = readline.createInterface({
   input: process.stdin, //sumber input: keyboard
   output: process.stdout,
 });
