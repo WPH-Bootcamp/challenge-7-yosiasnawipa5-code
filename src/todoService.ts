@@ -23,7 +23,7 @@
 
 // TODO: Buat fungsi untuk mencari To-Do berdasarkan keyword
 // Business Logic Layer
-import { Todo, TodoList, TodoOperations, OperationResult } from "./types";
+import { Todo, TodoList, TodoOperation, OperationResult } from "./types";
 import { readTodos, writeTodos } from "./storage";
 import { generateID, formatStatus, getCurrentTimestamp, isNonEmptyString } from "./utils";
 
