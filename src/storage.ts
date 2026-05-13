@@ -14,7 +14,7 @@ import { isTodoList } from "./utils"
 // TODO: Buat fungsi untuk inisialisasi storage (buat file kosong jika belum ada)
 
 //konfigurasi path file
-const DATA_DIR = path.join(--dirname, "..", "data");
+const DATA_DIR = path.join(__dirname, "..", "data");
 const DATA_File = path.join(DATA_DIR, "todos.json");
 
 //pastikan folder "data" ada sebelum dipakai
