@@ -22,21 +22,21 @@
 // TODO: Jalankan fungsi main
 //console.log('Welcome to TypeScript To-Do App!');
 //console.log('Start building your app here...');
-import * as readliine from "readline";
+import * as readline from "readline";
 import { TodoService } from "./todoService";
 
 const service = new TodoService();
 
-const rl = readline.createInterface({
+const rl = readliine.createInterface({
   input: process.stdin, //sumber input: keyboard
   output: process.stdout,
 });
 
 // Helper : Tanya User dan return jawaban sebagai promise
 
-function promt(question: string): Promise<string> {
+function prompt(question: string): Promise<string> {
   return new Promise((resolve) => {
-    rl.question(question, (answer) => {
+    rl.question(question, (answer: string) => {
       resolve(answer.trim()); //hapus spasi di ujung jawaban
     });
   });
