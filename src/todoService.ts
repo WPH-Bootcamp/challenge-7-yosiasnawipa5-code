@@ -25,7 +25,7 @@
 // Business Logic Layer
 import { Todo, TodoList, TodoOperation, OperationResult } from "./types";
 import { readTodos, writeTodos } from "./storage";
-import { generateId, getCurrentTimestamp, isNonEmptyString } from "./utils";
+import { generateId, formatStatus, getCurrentTimestamp, isNonEmptyString } from "./utils";
 
 //class TodoService - mengimplementasikan kontrak TodoOperations
 export class TodoService {
