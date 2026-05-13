@@ -25,10 +25,10 @@
 // Business Logic Layer
 import { Todo, TodoList, TodoOperation, OperationResult } from "./types";
 import { readTodos, writeTodos } from "./storage";
-import { generateId, formatStatus, getCurrentTimestamp, isNonEmptyString } from "./utils";
+import { generateId, getCurrentTimestamp, isNonEmptyString } from "./utils";
 
 //class TodoService - mengimplementasikan kontrak TodoOperations
-export class TodoService implements TodoOperations {
+export class TodoService {
 
   //add: Tambah To-Do baru
   addTodo(title: string): void {
@@ -40,7 +40,7 @@ export class TodoService implements TodoOperations {
     //baca data yang sudah ada
     const todos: TodoList = readTodos();
     const newTodo: Todo = {
-      id: generateID(todos),
+      id: generateId(todos),
       title: title.trim(), // hapus spasi di ujung
       status: "active", // selalu mulai aktif
       createdAt: getCurrentTimestamp(),
