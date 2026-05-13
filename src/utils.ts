@@ -63,3 +63,9 @@ export function getCurrentTimestamp(): string {
 export function isNonEmptyString(value: string): boolean {
   return value.trim().length > 0;
 }
+
+//HELPER: Format tampilan status [ACTIVE] atau [DONE]
+export function formatStatus(status: TodoStatus): string {
+  if (status === "active") return "[ACTIVE]";
+  return "[DONE] ";
+}
