@@ -7,7 +7,7 @@
 
 // TODO: Buat fungsi untuk memastikan input dari user adalah string yang valid
 // type Guard
-import { Todo, Todolist, TodoStatus } from "./types";
+import { Todo, TodoList, TodoStatus } from "./types";
 
 //type guard 1: cek apakah sebuah string adalah TodoStatus yang valid
 export function isTodoStatus(value: unknown): value is TodoStatus
@@ -49,7 +49,7 @@ export function generateId(todos: TodoList): number {
 
   // math.max(...) butuh list angka
   // spread operator (...) mengubah array menjadi arument terpisah
-  const maxId = Math.max(...todos.map((Todo) => Todo.id));
+  const maxId = Math.max(...todos.map((todo) => todo.id));
   return maxId + 1;
 }
 
